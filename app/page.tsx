@@ -209,7 +209,7 @@ export default function ParticleAnimation() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="text-center text-white z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-teal-400 bg-clip-text text-transparent">
-              Interactive Particles
+              Interactive Particles V2
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-md mx-auto">
               Move your mouse to interact with the particles and watch them dance
