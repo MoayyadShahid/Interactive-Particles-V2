@@ -20,10 +20,23 @@ export default function ParticleAnimation() {
   const particlesRef = useRef<Particle[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
   const [hasClicked, setHasClicked] = useState(false)
+  const [textOpacity, setTextOpacity] = useState(1)
 
   const handleClick = () => {
     setHasClicked(true)
   }
+
+  // Auto-hide text after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTextOpacity(0)
+      setTimeout(() => {
+        setHasClicked(true)
+      }, 500) // Wait for fade animation to complete
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -204,9 +217,9 @@ export default function ParticleAnimation() {
     <div className="relative w-full h-screen overflow-hidden bg-black">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full cursor-pointer" onClick={handleClick} />
 
-      {/* Optional overlay content */}
+      {/* Optional overlay content with fade effect */}
       {!hasClicked && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500" style={{ opacity: textOpacity }}>
           <div className="text-center text-white z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-teal-400 bg-clip-text text-transparent">
               Interactive Particles V2
